@@ -1,16 +1,24 @@
-maze = ("*******\n"
-        "*o    *\n"
-        "*  ****\n"
-        "*    x*\n"
-        "*******\n"
+maze = ("xxxxxxxxxxx\n"
+        "xo      x x\n"
+        "x xxxxx x x\n"
+        "x x   x x x\n"
+        "x x x xxx x\n"
+        "x   x x   x\n"
+        "xxxxx xxx x\n"
+        "x       x x\n"
+        "x xxxxx x x\n"
+        "x x   x   x\n"
+        "x x x xxx x\n"
+        "x x x     E\n"
+        "xxxxxxxxxxx\n"
         )
 
 # variable initializations        
 height = maze.count('\n')
 width = maze.find('\n')
 start = maze.find('o')
-wall = "*"
-exitchar = "x"
+wall = "x"
+exitchar = "E"
 orientation = "north"
 # a tuple of tuples of (position, orientation)
 seen = ()
