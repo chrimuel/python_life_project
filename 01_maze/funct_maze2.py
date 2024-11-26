@@ -1,11 +1,19 @@
 # Step 1: Define the maze
-maze = """
-*******
-*o    *
-*  ****
-*    x*
-*******
-"""
+maze = ("\n"
+        "xxxxxxxxxxx\n"
+        "xo      x x\n"
+        "x xxxxx x x\n"
+        "x x   x x x\n"
+        "x x x xxx x\n"
+        "x   x x   x\n"
+        "xxxxx xxx x\n"
+        "x       x x\n"
+        "x xxxxx x x\n"
+        "x x   x   x\n"
+        "x x x xxx x\n"
+        "x x x     E\n"
+        "xxxxxxxxxxx\n"
+        )
 
 # Step 2: Define the initial state (position and orientation)
 def find_position(maze, char):
@@ -16,7 +24,7 @@ def find_position(maze, char):
     return None
 
 start_pos = find_position(maze, 'o')  # Starting position
-exit_pos = find_position(maze, 'x')   # Exit position
+exit_pos = find_position(maze, 'E')   # Exit position
 orientation = "north"  # Initial orientation
 visited = set()         # Track visited positions and orientations
 
@@ -41,7 +49,7 @@ def get_next_state(maze, current_pos, orientation, visited):
         next_move = moves[next_orientation]
         next_pos = (current_pos[0] + next_move[0], current_pos[1] + next_move[1])
         
-        if lines[next_pos[0]][next_pos[1]] != "*":  # Check if the next cell is not a wall
+        if lines[next_pos[0]][next_pos[1]] != "x":  # Check if the next cell is not a wall
             return next_pos, next_orientation
     
         orientation = next_orientation  # Rotate to the next orientation
