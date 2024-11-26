@@ -20,6 +20,14 @@ exit_pos = find_position(maze, 'x')   # Exit position
 orientation = "north"  # Initial orientation
 visited = set()         # Track visited positions and orientations
 
+# Define symbols for orientations
+orientation_symbols = {
+    "north": "^",
+    "east": ">",
+    "south": "_",
+    "west": "<"
+}
+
 # Step 3: Define a function to compute the next state
 def get_next_state(maze, current_pos, orientation, visited):
     moves = {"north": (-1, 0), "east": (0, 1), "south": (1, 0), "west": (0, -1)}
@@ -40,9 +48,20 @@ def get_next_state(maze, current_pos, orientation, visited):
 
     return current_pos, orientation  # No valid move, remain in place
 
-# Step 4: Maze solving loop
+# Step 4: Define a function to print the maze with the current position
+def print_maze_with_position(maze, current_pos, orientation):
+    lines = maze.splitlines()
+    maze_list = [list(row) for row in lines]
+    symbol = orientation_symbols[orientation]
+    row, col = current_pos
+    maze_list[row][col] = symbol  # Replace current position with orientation symbol
+    print("\n".join("".join(row) for row in maze_list))  # Print maze row by row
+    print()  # Add a blank line for readability
+
+# Step 5: Maze solving loop
 current_pos = start_pos
 while current_pos != exit_pos:
+    print_maze_with_position(maze, current_pos, orientation)
     print(f"At {current_pos}, facing {orientation}")
     if (current_pos, orientation) in visited:
         print("Loop detected, no solution.")
@@ -50,6 +69,7 @@ while current_pos != exit_pos:
     current_pos, orientation = get_next_state(maze, current_pos, orientation, visited)
 
 if current_pos == exit_pos:
+    print_maze_with_position(maze, current_pos, orientation)
     print(f"Exit found at {current_pos}")
 else:
     print("Exit not found.")
