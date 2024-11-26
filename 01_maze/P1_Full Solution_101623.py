@@ -9,7 +9,7 @@ maze = ("xxxxxxxxxxx\n"
         "x xxxxx x x\n"
         "x x   x   x\n"
         "x x x xxx x\n"
-        "x x x     E\n"
+        "x x x     x\n"
         "xxxxxxxxxxx\n"
         )
 
