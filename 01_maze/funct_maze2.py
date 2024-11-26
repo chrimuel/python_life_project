@@ -38,21 +38,27 @@ orientation_symbols = {
 
 # Step 3: Define a function to compute the next state
 def get_next_state(maze, current_pos, orientation, visited):
+    # Define moves and orientation order (right, straight, left, back)
     moves = {"north": (-1, 0), "east": (0, 1), "south": (1, 0), "west": (0, -1)}
     directions = ["north", "east", "south", "west"]
-    lines = maze.splitlines()
+    right_first = {
+        "north": ["east", "north", "west", "south"],
+        "east": ["south", "east", "north", "west"],
+        "south": ["west", "south", "east", "north"],
+        "west": ["north", "west", "south", "east"]
+    }
     
+    lines = maze.splitlines()
     visited.add((current_pos, orientation))  # Mark current state as visited
     
-    for _ in range(4):  # Check right, forward, left, then backward
-        next_orientation = directions[(directions.index(orientation) + 1) % 4]
+    # Iterate directions in the correct order: right, straight, left, back
+    for next_orientation in right_first[orientation]:
         next_move = moves[next_orientation]
         next_pos = (current_pos[0] + next_move[0], current_pos[1] + next_move[1])
         
-        if lines[next_pos[0]][next_pos[1]] != "x":  # Check if the next cell is not a wall
+        # Check if the next position is within bounds and not a wall
+        if 0 <= next_pos[0] < len(lines) and 0 <= next_pos[1] < len(lines[0]) and lines[next_pos[0]][next_pos[1]] != "x":
             return next_pos, next_orientation
-    
-        orientation = next_orientation  # Rotate to the next orientation
 
     return current_pos, orientation  # No valid move, remain in place
 
