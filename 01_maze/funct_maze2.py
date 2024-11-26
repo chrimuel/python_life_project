@@ -1,3 +1,5 @@
+import time
+
 # Step 1: Define the maze
 maze = ("\n"
         "xxxxxxxxxxx\n"
@@ -63,7 +65,7 @@ def get_next_state(maze, current_pos, orientation, visited):
         next_pos = (current_pos[0] + next_move[0], current_pos[1] + next_move[1])
 
         # Check if the next position is within bounds and not a wall
-        if 0 <= next_pos[0] < len(lines) and 0 <= next_pos[1] < len(lines[0]) and lines[next_pos[0]][next_pos[1]] != wall_char:
+        if 0 <= next_pos[0] < len(lines) and 0 <= next_pos[1] < len(lines[1]) and lines[next_pos[0]][next_pos[1]] != wall_char:
             return next_pos, next_orientation
 
     return current_pos, orientation  # No valid move, remain in place
@@ -83,6 +85,7 @@ visualize = True  # Toggle visualization
 current_pos = start_pos
 while current_pos != exit_pos:
     if visualize:
+        time.sleep(0.3)  # Wait for 0.3 seconds between steps
         print_maze_with_position(maze, current_pos, orientation)
     print(f"At {current_pos}, facing {orientation}")
     if (current_pos, orientation) in visited:
