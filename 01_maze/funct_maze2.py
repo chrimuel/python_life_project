@@ -46,21 +46,24 @@ orientation_symbols = {
 
 # Step 3: Define a function to compute the next state
 def get_next_state(maze, current_pos, orientation, visited):
-    # Define moves and orientation order (right, straight, left, back)
+    # Define moves and orientation order
     moves = {"north": (-1, 0), "east": (0, 1), "south": (1, 0), "west": (0, -1)}
     directions = ["north", "east", "south", "west"]
-    right_first = {
-        "north": ["east", "north", "west", "south"],
-        "east": ["south", "east", "north", "west"],
-        "south": ["west", "south", "east", "north"],
-        "west": ["north", "west", "south", "east"]
-    }
-
+    
+    # Dynamically calculate "right, straight, left, back"
+    current_index = directions.index(orientation)
+    direction_order = [
+        directions[(current_index + 1) % 4],  # Right
+        directions[current_index],           # Straight
+        directions[(current_index - 1) % 4], # Left
+        directions[(current_index + 2) % 4]  # Back
+    ]
+    
     lines = maze.splitlines()
     visited.add((current_pos, orientation))  # Mark current state as visited
 
-    # Iterate directions in the correct order: right, straight, left, back
-    for next_orientation in right_first[orientation]:
+    # Iterate directions in the calculated order
+    for next_orientation in direction_order:
         next_move = moves[next_orientation]
         next_pos = (current_pos[0] + next_move[0], current_pos[1] + next_move[1])
 
