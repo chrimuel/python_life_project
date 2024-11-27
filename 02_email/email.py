@@ -29,6 +29,7 @@ def parse_csv_to_dict(filename):
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import make_msgid
+import random
 
 def send_email(student_email, student_info):
     sender_email = "office@muc.ch"
@@ -62,10 +63,12 @@ def send_email(student_email, student_info):
 
 
 
-# Test the function with your `exam.csv` file
+# Import your `exam.csv` file
 data = parse_csv_to_dict('02_email/exam.csv')
 print(data)
 
+# Choose random student for book presentation
+student_email = random.choice(list(data.keys()))
 
 # Example: Send an email
 for email, info in data.items():
