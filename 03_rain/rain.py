@@ -27,15 +27,18 @@ canvas.pack()
 # Draw grid lines
 cell_size = canvas_size // window_size
 
-for i in range(window_size + 1):
+for i in range(window_size):
     # Vertical lines
-    x = i * cell_size
+    x = (i+0.5) * cell_size
     canvas.create_line(x, 0, x, canvas_size, fill="gray")
     # Horizontal lines
-    y = i * cell_size
+    y = (i+0.5) * cell_size
     canvas.create_line(0, y, canvas_size, y, fill="gray")
 
 
+canvas.update_idletasks()
+
+""" 
 # Step 5: Represent Drops of Water
 
 # Initialize drops of water with starting size
@@ -86,4 +89,4 @@ def update_drops():
 
 # Step 7: Run the Simulation
 update_drops()
-root.mainloop()
+root.mainloop() """
